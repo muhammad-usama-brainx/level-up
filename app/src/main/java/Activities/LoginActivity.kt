@@ -1,8 +1,9 @@
-package com.example.levelup
+package Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.levelup.MainActivity
 import com.example.levelup.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {

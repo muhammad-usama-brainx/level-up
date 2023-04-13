@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:autofillHints=""
-        android:background="@drawable/edit_text_border"
+        android:background="@drawable/resource_edittext_border"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -31,8 +31,8 @@
         android:layout_height="55dp"
         android:layout_marginTop="16dp"
         android:autofillHints=""
-        android:background="@drawable/edit_text_border"
-        android:drawableEnd="@drawable/eye"
+        android:background="@drawable/resource_edittext_border"
+        android:drawableEnd="@drawable/ic_eye"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -52,7 +52,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/image_level_up_logo" />
 
     <TextView
         android:id="@+id/loginText"
@@ -87,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:background="@drawable/button_background"
+        android:background="@drawable/resource_button_background"
         android:backgroundTint="@color/blue_500"
         android:text="Log In"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/sponsor_logo" />
+        app:srcCompat="@drawable/image_sponsor_logo" />
 
     <TextView
         android:id="@+id/textView"
