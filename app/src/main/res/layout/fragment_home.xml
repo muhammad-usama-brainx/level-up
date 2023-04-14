@@ -59,7 +59,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
-                android:layout_width="178dp"
+                android:layout_width="0dp"
                 android:layout_height="108dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
@@ -101,7 +101,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView7"
-                android:layout_width="178dp"
+                android:layout_width="0dp"
                 android:layout_height="108dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -145,7 +145,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView6"
-                android:layout_width="178dp"
+                android:layout_width="0dp"
                 android:layout_height="108dp"
                 android:layout_weight="1"
                 android:maxHeight="108dp"
@@ -188,7 +188,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
-                android:layout_width="178dp"
+                android:layout_width="0dp"
                 android:layout_height="108dp"
                 android:layout_weight="1"
                 android:maxHeight="108dp"
@@ -230,7 +230,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView14"
-                android:layout_width="178dp"
+                android:layout_width="0dp"
                 android:layout_height="108dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -273,7 +273,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView13"
-                android:layout_width="178dp"
+                android:layout_width="0dp"
                 android:layout_height="108dp"
                 android:layout_weight="1"
                 android:maxHeight="108dp"
@@ -321,6 +321,9 @@
                 android:layout_marginTop="20dp"
                 app:cardBackgroundColor="@color/blue_700"
                 app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView14">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
