@@ -1,8 +1,8 @@
 package com.example.levelup
 
-import Fragments.HomeFragment
-import Fragments.NotificationFragment
-import Fragments.SettingsFragment
+import fragments.HomeFragment
+import fragments.NotificationFragment
+import fragments.SettingsFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment

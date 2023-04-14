@@ -1,3 +1,9 @@
-package Models
+package models
 
-data class Notification()
+data class Notification(
+    val name: String,
+    val role: String,
+    val title: String,
+    val message: String,
+    val time: String
+);
