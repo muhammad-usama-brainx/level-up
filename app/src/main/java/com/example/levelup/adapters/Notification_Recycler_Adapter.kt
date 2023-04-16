@@ -1,4 +1,4 @@
-package adapters
+package com.example.levelup.adapters
 
 
 import android.content.Context
@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.levelup.R
-import models.Notification
+import com.example.levelup.models.Notification
 
-class Notification_Recycler_Adapter(private val notificationsList: MutableList<Notification>,private val context: Context) : RecyclerView.Adapter<Notification_Recycler_Adapter.CardViewHolder>() {
+class Notification_Recycler_Adapter(private val notificationsList: MutableList<Notification>, private val context: Context) : RecyclerView.Adapter<Notification_Recycler_Adapter.CardViewHolder>() {
 
     inner class CardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var name: TextView = view.findViewById(R.id.name)

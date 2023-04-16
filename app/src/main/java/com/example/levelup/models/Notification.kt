@@ -1,4 +1,4 @@
-package models
+package com.example.levelup.models
 
 data class Notification(
     val name: String,

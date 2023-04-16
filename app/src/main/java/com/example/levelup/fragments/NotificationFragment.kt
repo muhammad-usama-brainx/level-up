@@ -1,6 +1,6 @@
-package fragments
+package com.example.levelup.fragments
 
-import adapters.Notification_Recycler_Adapter
+import com.example.levelup.adapters.Notification_Recycler_Adapter
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.levelup.MainActivity
 import com.example.levelup.R
 import com.example.levelup.R.id
-import models.Notification
+import com.example.levelup.models.Notification
 
 
 class NotificationFragment : Fragment() {

@@ -1,4 +1,4 @@
-package Fragments
+package com.example.levelup.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,16 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.levelup.R
 
-
-class HomeFragment : Fragment() {
+class SettingsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_settings, container, false)
     }
-
 
 }

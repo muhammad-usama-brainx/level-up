@@ -1,4 +1,4 @@
-package Activities
+package com.example.levelup.Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
