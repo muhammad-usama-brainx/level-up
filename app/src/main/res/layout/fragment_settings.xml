@@ -52,7 +52,7 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView3"
+                android:id="@+id/profileCardView"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="8dp"
@@ -106,7 +106,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView5"
+                android:id="@+id/changePasswordCardView"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="8dp"
@@ -160,7 +160,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView8"
+                android:id="@+id/coachingPlanCardView"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="8dp"
@@ -214,7 +214,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView9"
+                android:id="@+id/contactUsCardView"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="8dp"
@@ -268,7 +268,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView12"
+                android:id="@+id/privacyCardView"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="8dp"
@@ -323,7 +323,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView11"
+                android:id="@+id/faqCardView"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="8dp"
