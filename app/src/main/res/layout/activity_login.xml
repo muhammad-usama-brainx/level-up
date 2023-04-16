@@ -11,8 +11,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="16dp"
         android:fillViewport="true"
+        tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/ubunturegular"
                 android:text="Forgot Password?"
                 android:textColor="@color/blue_200"
                 android:textSize="14dp"
@@ -73,6 +74,7 @@
                 android:background="@drawable/resource_edittext_border"
                 android:drawableEnd="@drawable/ic_eye"
                 android:ems="10"
+                android:fontFamily="@font/montserratregular"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:padding="16dp"
@@ -114,6 +116,7 @@
                 android:autofillHints=""
                 android:background="@drawable/resource_edittext_border"
                 android:ems="10"
+                android:fontFamily="@font/ubunturegular"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:padding="16dp"
@@ -154,6 +157,7 @@
                 android:id="@+id/loginText"
                 android:layout_width="80dp"
                 android:layout_height="28dp"
+                android:fontFamily="@font/geometosneuebold"
                 android:text="LOGIN"
                 android:textColor="#070707"
                 android:textSize="22dp"
