@@ -1,17 +1,25 @@
 package com.example.levelup
 
+
 import SelectedNavItem
+import com.example.levelup.fragments.HomeFragment
+import com.example.levelup.fragments.NotificationFragment
+import com.example.levelup.fragments.SettingsFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.levelup.databinding.ActivityMainBinding
+import com.example.levelup.viewModels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var selectedNavItem: SelectedNavItem
 
+    private lateinit var selectedNavItem: SelectedNavItem
+    private lateinit var mainViewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -19,36 +27,33 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
+
         selectedNavItem = SelectedNavItem.Home
         updateActiveNavItem()
+
+        //Getting instance of view model
+        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        //showing home fragment by default
         replaceFragment(HomeFragment())
 
+        //Bottom Navigation click listener
         binding.bottomNavigationBar.setOnItemSelectedListener {
+        
+            //getting fragment to display by ID
+            val fragmentToShow = mainViewModel.getFragmentFromMenuId(it)
+            replaceFragment(fragmentToShow)
+              updateActiveNavItem()
+          true
+     }
 
-            when (it.itemId) {
-                R.id.home -> {
-                    selectedNavItem = SelectedNavItem.Home
-                    updateActiveNavItem()
-                    replaceFragment(HomeFragment())
-                }
-                R.id.notification -> {
-                    selectedNavItem = SelectedNavItem.Notification
-                    updateActiveNavItem()
-                    replaceFragment(NotificationFragment())
-                }
-                R.id.settings -> {
-                    selectedNavItem = SelectedNavItem.Settings
-                    updateActiveNavItem()
-                    replaceFragment(SettingsFragment())
-                }
-            }
-            true
-        }
 
 
     }
 
+
     private fun replaceFragment(fragment: Fragment) {
+
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frameContainer, fragment)
         transaction.commit()

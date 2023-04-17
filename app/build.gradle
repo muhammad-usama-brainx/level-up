@@ -7,13 +7,13 @@ android {
     namespace 'com.example.levelup'
     compileSdk 33
 
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
 
     defaultConfig {
         applicationId "com.example.levelup"
-        minSdk 24
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
