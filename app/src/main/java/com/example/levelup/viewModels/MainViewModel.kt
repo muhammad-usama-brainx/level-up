@@ -1,5 +1,6 @@
 package com.example.levelup.viewModels
 
+import SelectedNavItem
 import android.content.Context
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -12,13 +13,23 @@ import com.example.levelup.fragments.SettingsFragment
 
 class MainViewModel : ViewModel() {
 
+    var selectedNavItem: SelectedNavItem = SelectedNavItem.Home
 
     fun getFragmentFromMenuId(item: MenuItem) : Fragment
     {
-        var fragment: Fragment = when(item.itemId) {
-            R.id.home -> HomeFragment()
-            R.id.notification -> NotificationFragment()
-            R.id.settings -> SettingsFragment()
+        val fragment: Fragment = when(item.itemId) {
+            R.id.home -> {
+                selectedNavItem = SelectedNavItem.Home
+                HomeFragment()
+            }
+            R.id.notification -> {
+                selectedNavItem = SelectedNavItem.Notification
+                NotificationFragment()
+            }
+            R.id.settings -> {
+                selectedNavItem = SelectedNavItem.Settings
+                SettingsFragment()
+            }
             else -> HomeFragment()
         }
         return  fragment

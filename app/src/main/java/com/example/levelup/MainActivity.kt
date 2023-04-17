@@ -3,13 +3,10 @@ package com.example.levelup
 
 import SelectedNavItem
 import com.example.levelup.fragments.HomeFragment
-import com.example.levelup.fragments.NotificationFragment
-import com.example.levelup.fragments.SettingsFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.levelup.databinding.ActivityMainBinding
 import com.example.levelup.viewModels.MainViewModel
@@ -17,9 +14,8 @@ import com.example.levelup.viewModels.MainViewModel
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
-    private lateinit var selectedNavItem: SelectedNavItem
     private lateinit var mainViewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,13 +23,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-
-        selectedNavItem = SelectedNavItem.Home
-        updateActiveNavItem()
-
         //Getting instance of view model
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
+        updateActiveNavItem()
         //showing home fragment by default
         replaceFragment(HomeFragment())
 
@@ -43,11 +36,10 @@ class MainActivity : AppCompatActivity() {
             //getting fragment to display by ID
             val fragmentToShow = mainViewModel.getFragmentFromMenuId(it)
             replaceFragment(fragmentToShow)
-              updateActiveNavItem()
-          true
+            updateActiveNavItem()
+
+            true
      }
-
-
 
     }
 
@@ -64,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         binding.notificationBorder.visibility = View.INVISIBLE
         binding.settingsBorder.visibility = View.INVISIBLE
 
-        when (selectedNavItem) {
+        when (mainViewModel.selectedNavItem) {
             SelectedNavItem.Home -> {
                 binding.homeBorder.visibility = View.VISIBLE
             }
