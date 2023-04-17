@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.levelup.adapters.Notification_Recycler_Adapter
 import com.example.levelup.models.Notification
 
-class NotificationFragmentViewModel(private val context: Context) : ViewModel() {
+class NotificationFragmentViewModel(context: Context) : ViewModel() {
 
     private val notifications = mutableListOf<Notification>(
         Notification(
