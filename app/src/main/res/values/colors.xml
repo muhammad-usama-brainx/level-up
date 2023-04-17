@@ -14,5 +14,6 @@
 
 
     <color name="border_color">#D4DAE4</color>
+    <color name="dark_grey">#5D687E</color>
     <color name="background_color">#EFF2F9</color>
 </resources>
