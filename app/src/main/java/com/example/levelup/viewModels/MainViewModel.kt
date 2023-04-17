@@ -14,25 +14,28 @@ import com.example.levelup.fragments.SettingsFragment
 class MainViewModel : ViewModel() {
 
     var selectedNavItem: SelectedNavItem = SelectedNavItem.Home
+    val fragments = mutableListOf<Fragment>(
+        HomeFragment(),NotificationFragment(), SettingsFragment()
+    )
 
-    fun getFragmentFromMenuId(item: MenuItem) : Fragment
+    fun getPositionFromMenuItem(item: MenuItem) : Int
     {
-        val fragment: Fragment = when(item.itemId) {
+        val position: Int = when(item.itemId) {
             R.id.home -> {
                 selectedNavItem = SelectedNavItem.Home
-                HomeFragment()
+               0
             }
             R.id.notification -> {
                 selectedNavItem = SelectedNavItem.Notification
-                NotificationFragment()
+                1
             }
             R.id.settings -> {
                 selectedNavItem = SelectedNavItem.Settings
-                SettingsFragment()
+                2
             }
-            else -> HomeFragment()
+            else ->0
         }
-        return  fragment
+        return  position
     }
 
 

@@ -9,7 +9,10 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
+import com.example.levelup.adapters.ViewPagerAdapter
 import com.example.levelup.databinding.ActivityMainBinding
 import com.example.levelup.viewModels.MainViewModel
 import com.google.android.material.badge.BadgeDrawable
@@ -20,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var notificationMenuItem: MenuItem
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var viewPagerAdapter: ViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,35 +35,46 @@ class MainActivity : AppCompatActivity() {
         //Getting instance of view model
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
+
+        //Setting badge for notification
         notificationMenuItem = binding.bottomNavigationBar.menu.findItem(R.id.notification)
         badgeDrawable = binding.bottomNavigationBar.getOrCreateBadge(notificationMenuItem.itemId)
         badgeDrawable.isVisible = true
         badgeDrawable.backgroundColor = ContextCompat.getColor(this, R.color.blue_500)
         badgeDrawable.badgeGravity = BadgeDrawable.TOP_END
 
-        updateActiveNavItem()
-        //showing home fragment by default
-        replaceFragment(HomeFragment())
+        viewPagerAdapter = ViewPagerAdapter(this, mainViewModel.fragments)
+        binding.viewPager.adapter = viewPagerAdapter
 
-        //Bottom Navigation click listener
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                // Called when a new page has been selected
+                when (position) {
+                    0 -> {
+                        mainViewModel.selectedNavItem = SelectedNavItem.Home
+                        binding.bottomNavigationBar.selectedItemId = R.id.home
+                        updateActiveNavItem()
+                    }
+                    1 -> {
+                        mainViewModel.selectedNavItem = SelectedNavItem.Notification
+                        binding.bottomNavigationBar.selectedItemId = R.id.notification
+                        updateActiveNavItem()
+                    }
+                    2 -> {
+                        mainViewModel.selectedNavItem = SelectedNavItem.Settings
+                        binding.bottomNavigationBar.selectedItemId = R.id.settings
+                        updateActiveNavItem()
+                    }
+                }
+            }
+        })
+
+
         binding.bottomNavigationBar.setOnItemSelectedListener {
-        
-            //getting fragment to display by ID
-            val fragmentToShow = mainViewModel.getFragmentFromMenuId(it)
-            replaceFragment(fragmentToShow)
-            updateActiveNavItem()
-
+            binding.viewPager.currentItem = mainViewModel.getPositionFromMenuItem(it)
             true
-     }
-
-    }
-
-
-    private fun replaceFragment(fragment: Fragment) {
-
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frameContainer, fragment)
-        transaction.commit()
+        }
     }
 
     private fun updateActiveNavItem() {
