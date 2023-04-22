@@ -34,6 +34,8 @@ class LoginViewModel(private val authApi: AuthApi) : ViewModel() {
     }
 
     fun isValidInput(email: String, password: String): Boolean {
+        if (!email.contains("@") || password.length < 6)
+            return false
         return true
     }
 }

@@ -42,6 +42,8 @@ class LoginActivity : AppCompatActivity() {
 
             if (isValidInput) {
                 loginViewModel.login(email, password)
+            } else {
+                Toast.makeText(this, "Invalid inputs", Toast.LENGTH_SHORT).show()
             }
         }
     }
