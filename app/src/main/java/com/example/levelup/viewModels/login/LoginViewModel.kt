@@ -1,5 +1,6 @@
 package com.example.levelup.viewModels.login
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,16 +11,21 @@ import com.example.levelup.repo.AuthRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val authApi: AuthApi) : ViewModel() {
+class LoginViewModel(private val authApi: AuthApi, private val context: Context) : ViewModel() {
 
 
-    private val authRepo: AuthRepo = AuthRepo.getInstance(authApi)
+    private val authRepo: AuthRepo = AuthRepo.getInstance(authApi, context)
 
     var isLoading = MutableLiveData<Boolean>(false)
     var error = MutableLiveData<String?>(null)
     val user: LiveData<User>
         get() = authRepo.user
 
+    fun autoLogin() {
+        isLoading.value = true
+        authRepo.autoLogin()
+        isLoading.value = false
+    }
 
     fun login(email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {

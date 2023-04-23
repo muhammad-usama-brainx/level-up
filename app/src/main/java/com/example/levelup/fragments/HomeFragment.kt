@@ -8,7 +8,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.levelup.R
-import com.example.levelup.viewModels.HomeFragmentViewModel
+import com.example.levelup.api.AuthApi
+import com.example.levelup.api.RetrofitHelper
+import com.example.levelup.viewModels.home.HomeFragmentViewModel
+import com.example.levelup.viewModels.home.HomeFragmentViewModelFactory
+import retrofit2.Retrofit
 
 
 class HomeFragment : Fragment() {
@@ -30,7 +34,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this)[HomeFragmentViewModel::class.java]
+        val authApi = RetrofitHelper.getInstance().create(AuthApi::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            HomeFragmentViewModelFactory(authApi, requireContext().applicationContext)
+        )[HomeFragmentViewModel::class.java]
 
         nameTextView = view.findViewById(R.id.nameTextView)
         quoteTextView = view.findViewById(R.id.quoteTextView)

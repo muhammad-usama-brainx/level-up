@@ -2,14 +2,11 @@ package com.example.levelup
 
 
 import SelectedNavItem
-import com.example.levelup.fragments.HomeFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.levelup.adapters.ViewPagerAdapter

@@ -27,12 +27,18 @@ class LoginActivity : AppCompatActivity() {
 
         val authApi = RetrofitHelper.getInstance().create(AuthApi::class.java)
         loginViewModel =
-            ViewModelProvider(this, LoginViewModelFactory(authApi))[LoginViewModel::class.java]
+            ViewModelProvider(
+                this,
+                LoginViewModelFactory(authApi, applicationContext)
+            )[LoginViewModel::class.java]
 
 
         progressBarListener()
         successLoginListener()
         failLoginListener()
+
+        //Try Auto login
+        loginViewModel.autoLogin()
 
 
         binding.loginButton.setOnClickListener {
