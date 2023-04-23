@@ -47,7 +47,15 @@ class AuthRepo(private val authApi: AuthApi, private val context: Context) {
     }
 
     suspend fun logout(): Boolean {
-        return true
+
+        val result = authApi.logout(user.value!!.uid, user.value!!.token, user.value!!.client)
+
+        if (result.isSuccessful) {
+            deleteLocally()
+            userLiveData.postValue(null)
+            return true
+        }
+        return false
     }
 
     fun autoLogin(): Boolean {
@@ -75,8 +83,13 @@ class AuthRepo(private val authApi: AuthApi, private val context: Context) {
         edit.putString("name", user.value!!.name)
         edit.putString("email", user.value!!.email)
         edit.putString("token", user.value!!.token)
-        edit.putString("client", user.value!!.token)
+        edit.putString("client", user.value!!.client)
         edit.apply()
+    }
+
+    private suspend fun deleteLocally() {
+        val prefs = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        prefs.edit().clear().apply()
     }
 
     //Singleton
