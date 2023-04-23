@@ -1,8 +1,10 @@
 package com.example.levelup.models
 
 data class User(
-    val email: String,
-    val id: Int,
-    val name: String,
-    val uid: String
+    var email: String,
+    var id: Int,
+    var name: String,
+    var uid: String,
+    var token: String,
+    var client: String
 )
