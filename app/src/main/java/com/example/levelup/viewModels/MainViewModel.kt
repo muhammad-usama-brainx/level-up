@@ -15,15 +15,14 @@ class MainViewModel : ViewModel() {
 
     var selectedNavItem: SelectedNavItem = SelectedNavItem.Home
     val fragments = mutableListOf<Fragment>(
-        HomeFragment(),NotificationFragment(), SettingsFragment()
+        HomeFragment(), NotificationFragment(), SettingsFragment()
     )
 
-    fun getPositionFromMenuItem(item: MenuItem) : Int
-    {
-        val position: Int = when(item.itemId) {
+    fun getPositionFromMenuItem(item: MenuItem): Int {
+        val position: Int = when (item.itemId) {
             R.id.home -> {
                 selectedNavItem = SelectedNavItem.Home
-               0
+                0
             }
             R.id.notification -> {
                 selectedNavItem = SelectedNavItem.Notification
@@ -33,9 +32,9 @@ class MainViewModel : ViewModel() {
                 selectedNavItem = SelectedNavItem.Settings
                 2
             }
-            else ->0
+            else -> 0
         }
-        return  position
+        return position
     }
 
 
