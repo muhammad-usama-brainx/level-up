@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.example.levelup.MyApp
 import com.example.levelup.R
 import com.example.levelup.adapters.NotificationRecyclerAdapter
 import com.example.levelup.api.NotificationApi
@@ -51,9 +52,8 @@ class NotificationFragment : Fragment() {
 
         val notificationApi = RetrofitHelper.getInstance().create(NotificationApi::class.java)
         val notificationRepo = NotificationRepo(notificationApi)
-        val database = Room.databaseBuilder(
-            requireContext().applicationContext, Database::class.java, "database"
-        ).fallbackToDestructiveMigration().build()
+        val myApp = requireContext().applicationContext as MyApp
+        val database = myApp.databaseInstance()
 
 
         viewModel =

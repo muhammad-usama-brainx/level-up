@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.levelup.MainActivity
+import com.example.levelup.MyApp
 import com.example.levelup.api.AuthApi
 import com.example.levelup.api.RetrofitHelper
 import com.example.levelup.data.Database
@@ -28,9 +29,8 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val authApi = RetrofitHelper.getInstance().create(AuthApi::class.java)
-        val database = Room.databaseBuilder(applicationContext, Database::class.java, "database")
-            .fallbackToDestructiveMigration()
-            .build()
+        val myApp = applicationContext as MyApp
+        val database = myApp.databaseInstance()
 
         loginViewModel =
             ViewModelProvider(

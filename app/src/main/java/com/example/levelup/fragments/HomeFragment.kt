@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import com.example.levelup.MyApp
 import com.example.levelup.R
 import com.example.levelup.api.AuthApi
 import com.example.levelup.api.RetrofitHelper
@@ -38,12 +39,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val authApi = RetrofitHelper.getInstance().create(AuthApi::class.java)
-        val database = Room.databaseBuilder(
-            requireContext().applicationContext,
-            Database::class.java,
-            "database"
-        )
-            .fallbackToDestructiveMigration().build()
+        val myApp = requireContext().applicationContext as MyApp
+        val database = myApp.databaseInstance()
 
         viewModel = ViewModelProvider(
             this,
