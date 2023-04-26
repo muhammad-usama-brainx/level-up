@@ -8,9 +8,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.levelup.R
-import com.example.levelup.models.Notification
+import com.example.levelup.data.notification.Announcement
 
-class Notification_Recycler_Adapter(private val notificationsList: MutableList<Notification>, private val context: Context) : RecyclerView.Adapter<Notification_Recycler_Adapter.CardViewHolder>() {
+
+class NotificationRecyclerAdapter(
+    private val notificationsList: MutableList<Announcement>,
+    private val context: Context
+) : RecyclerView.Adapter<NotificationRecyclerAdapter.CardViewHolder>() {
 
     inner class CardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var name: TextView = view.findViewById(R.id.name)
@@ -21,12 +25,13 @@ class Notification_Recycler_Adapter(private val notificationsList: MutableList<N
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.notification_card,parent,false)
+        val view: View =
+            LayoutInflater.from(context).inflate(R.layout.notification_card, parent, false)
         return CardViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-       return notificationsList.size
+        return notificationsList.size
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {

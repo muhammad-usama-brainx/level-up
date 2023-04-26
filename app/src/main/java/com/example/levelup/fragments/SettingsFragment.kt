@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
 import com.example.levelup.R
 import com.example.levelup.activities.LoginActivity
 import com.example.levelup.api.AuthApi
 import com.example.levelup.api.RetrofitHelper
+import com.example.levelup.data.Database
 import com.example.levelup.databinding.FragmentSettingsBinding
 import com.example.levelup.viewModels.settings.SettingsFragmentViewModel
 import com.example.levelup.viewModels.settings.SettingsFragmentViewModelFactory
@@ -48,9 +50,17 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val authApi = RetrofitHelper.getInstance().create(AuthApi::class.java)
+        val database = Room.databaseBuilder(
+            requireContext().applicationContext,
+            Database::class.java,
+            "database"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+
         viewModel = ViewModelProvider(
             this,
-            SettingsFragmentViewModelFactory(authApi, requireContext().applicationContext)
+            SettingsFragmentViewModelFactory(authApi, database)
         )[SettingsFragmentViewModel::class.java]
 
 

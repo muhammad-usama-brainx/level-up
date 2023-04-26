@@ -1,6 +1,7 @@
 package com.example.levelup.api
 
-import com.example.levelup.models.User
+
+import com.example.levelup.data.user.User
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE

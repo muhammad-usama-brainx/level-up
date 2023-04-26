@@ -7,9 +7,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
 import com.example.levelup.MainActivity
 import com.example.levelup.api.AuthApi
 import com.example.levelup.api.RetrofitHelper
+import com.example.levelup.data.Database
 import com.example.levelup.databinding.ActivityLoginBinding
 import com.example.levelup.viewModels.login.LoginViewModel
 import com.example.levelup.viewModels.login.LoginViewModelFactory
@@ -26,19 +28,24 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val authApi = RetrofitHelper.getInstance().create(AuthApi::class.java)
+        val database = Room.databaseBuilder(applicationContext, Database::class.java, "database")
+            .fallbackToDestructiveMigration()
+            .build()
+
         loginViewModel =
             ViewModelProvider(
                 this,
-                LoginViewModelFactory(authApi, applicationContext)
+                LoginViewModelFactory(authApi, database)
             )[LoginViewModel::class.java]
+
+
+        //Autologin
+        loginViewModel.tryAutoLogin()
 
 
         progressBarListener()
         successLoginListener()
         failLoginListener()
-
-        //Try Auto login
-        loginViewModel.autoLogin()
 
 
         binding.loginButton.setOnClickListener {
@@ -57,6 +64,7 @@ class LoginActivity : AppCompatActivity() {
     private fun progressBarListener() {
         //Progressbar
         loginViewModel.isLoading.observe(this, Observer { isBusy ->
+            println(isBusy)
             if (isBusy) {
                 binding.progressBar.visibility = View.VISIBLE
                 binding.mainView.visibility = View.INVISIBLE

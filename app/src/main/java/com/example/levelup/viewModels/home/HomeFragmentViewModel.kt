@@ -1,18 +1,25 @@
 package com.example.levelup.viewModels.home
 
-import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.levelup.api.AuthApi
-import com.example.levelup.repo.AuthRepo
+import com.example.levelup.data.Database
+import kotlinx.coroutines.launch
 
-class HomeFragmentViewModel(private val authApi: AuthApi, private val context: Context) :
+class HomeFragmentViewModel(private val authApi: AuthApi, private val database: Database) :
     ViewModel() {
-    private var name = AuthRepo.getInstance(authApi, context).user.value!!.name
+
+    var name =  MutableLiveData<String>("Unknown")
     private var quote = "\"You can make money or you can make excuses. Which do you prefer?\""
     private var quoteWriter = "Usama Javed"
 
+    init {
+        viewModelScope.launch {
+            name.postValue(database.userDao().getUser()!!.name)
+        }
+    }
 
-    fun name(): String = name
     fun quote(): String = quote
     fun quoteWriter(): String = quoteWriter
 
