@@ -1,6 +1,6 @@
 package com.example.levelup.api
 
-import com.example.levelup.data.notification.Notification
+import com.example.levelup.data.models.notification.Notification
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
