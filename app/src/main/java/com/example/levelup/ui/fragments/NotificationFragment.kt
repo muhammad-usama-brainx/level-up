@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.levelup.R
 import com.example.levelup.ui.adapters.NotificationRecyclerAdapter
 import com.example.levelup.databinding.FragmentNotificationBinding
-import com.example.levelup.ui.viewModels.home.NotificationFragmentViewModel
+import com.example.levelup.ui.viewModels.NotificationFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
