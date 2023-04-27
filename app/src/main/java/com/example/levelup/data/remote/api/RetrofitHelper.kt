@@ -1,4 +1,4 @@
-package com.example.levelup.api
+package com.example.levelup.data.remote.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

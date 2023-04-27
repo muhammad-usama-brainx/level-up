@@ -1,14 +1,20 @@
-package com.example.levelup.ui.viewModels.settings
+package com.example.levelup.ui.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.levelup.api.AuthApi
+import com.example.levelup.data.remote.api.AuthApi
 import com.example.levelup.data.Database
 import com.example.levelup.data.repo.AuthRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class SettingsFragmentViewModel(private val authApi: AuthApi, private val database: Database) :
+@HiltViewModel
+class SettingsFragmentViewModel @Inject constructor(
+    private val authApi: AuthApi,
+    private val database: Database
+) :
     ViewModel() {
 
     private val authRepo = AuthRepo(authApi)

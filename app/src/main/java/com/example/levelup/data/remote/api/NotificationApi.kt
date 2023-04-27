@@ -1,4 +1,4 @@
-package com.example.levelup.api
+package com.example.levelup.data.remote.api
 
 import com.example.levelup.data.models.notification.Notification
 import retrofit2.Call

@@ -1,13 +1,20 @@
-package com.example.levelup.ui.viewModels.home
+package com.example.levelup.ui.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.levelup.api.AuthApi
+import com.example.levelup.data.remote.api.AuthApi
 import com.example.levelup.data.Database
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeFragmentViewModel(private val authApi: AuthApi, private val database: Database) :
+
+@HiltViewModel
+class HomeFragmentViewModel @Inject constructor(
+    private val authApi: AuthApi,
+    private val database: Database
+) :
     ViewModel() {
 
     var name = MutableLiveData<String>("Unknown")

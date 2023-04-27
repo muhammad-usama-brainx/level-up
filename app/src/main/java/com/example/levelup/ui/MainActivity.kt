@@ -14,7 +14,10 @@ import com.example.levelup.ui.adapters.ViewPagerAdapter
 import com.example.levelup.databinding.ActivityMainBinding
 import com.example.levelup.ui.viewModels.MainViewModel
 import com.google.android.material.badge.BadgeDrawable
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var badgeDrawable: BadgeDrawable

@@ -7,24 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
-import com.example.levelup.MyApp
 import com.example.levelup.R
 import com.example.levelup.ui.activities.LoginActivity
-import com.example.levelup.api.AuthApi
-import com.example.levelup.api.RetrofitHelper
-import com.example.levelup.data.Database
 import com.example.levelup.databinding.FragmentSettingsBinding
-import com.example.levelup.ui.viewModels.settings.SettingsFragmentViewModel
-import com.example.levelup.ui.viewModels.settings.SettingsFragmentViewModelFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import com.example.levelup.ui.viewModels.SettingsFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import retrofit2.create
 
+
+@AndroidEntryPoint
 class SettingsFragment : Fragment() {
 
     private lateinit var profileCardView: CardView
@@ -35,7 +29,7 @@ class SettingsFragment : Fragment() {
     private lateinit var faqCardView: CardView
     private lateinit var logoutCardView: CardView
 
-    private lateinit var viewModel: SettingsFragmentViewModel
+    private val viewModel: SettingsFragmentViewModel by viewModels()
     private lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(
@@ -49,15 +43,6 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val authApi = RetrofitHelper.getInstance().create(AuthApi::class.java)
-        val myApp = requireContext().applicationContext as MyApp
-        val database = myApp.databaseInstance()
-
-        viewModel = ViewModelProvider(
-            this,
-            SettingsFragmentViewModelFactory(authApi, database)
-        )[SettingsFragmentViewModel::class.java]
 
 
         profileCardView = view.findViewById(R.id.profileCardView)

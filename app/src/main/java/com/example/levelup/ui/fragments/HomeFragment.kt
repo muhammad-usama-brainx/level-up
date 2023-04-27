@@ -7,25 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
-import com.example.levelup.MyApp
 import com.example.levelup.R
-import com.example.levelup.api.AuthApi
-import com.example.levelup.api.RetrofitHelper
-import com.example.levelup.data.Database
-import com.example.levelup.ui.viewModels.home.HomeFragmentViewModel
-import com.example.levelup.ui.viewModels.home.HomeFragmentViewModelFactory
-import retrofit2.Retrofit
+import com.example.levelup.ui.viewModels.HomeFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import androidx.fragment.app.viewModels
 
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var nameTextView: TextView
     private lateinit var quoteTextView: TextView
     private lateinit var quoteWriterTextView: TextView
-
-    private lateinit var viewModel: HomeFragmentViewModel
+    private val viewModel: HomeFragmentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,15 +31,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val authApi = RetrofitHelper.getInstance().create(AuthApi::class.java)
-        val myApp = requireContext().applicationContext as MyApp
-        val database = myApp.databaseInstance()
-
-        viewModel = ViewModelProvider(
-            this,
-            HomeFragmentViewModelFactory(authApi, database)
-        )[HomeFragmentViewModel::class.java]
 
         nameTextView = view.findViewById(R.id.nameTextView)
         quoteTextView = view.findViewById(R.id.quoteTextView)

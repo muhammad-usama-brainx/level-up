@@ -1,6 +1,6 @@
 package com.example.levelup.data.repo
 
-import com.example.levelup.api.NotificationApi
+import com.example.levelup.data.remote.api.NotificationApi
 import com.example.levelup.data.models.notification.Announcement
 import com.example.levelup.data.models.user.User
 

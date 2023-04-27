@@ -1,34 +1,28 @@
 package com.example.levelup.ui.fragments
 
 import android.annotation.SuppressLint
-import android.app.Notification
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import com.example.levelup.MyApp
 import com.example.levelup.R
 import com.example.levelup.ui.adapters.NotificationRecyclerAdapter
-import com.example.levelup.api.NotificationApi
-import com.example.levelup.api.RetrofitHelper
-import com.example.levelup.data.Database
 import com.example.levelup.databinding.FragmentNotificationBinding
-import com.example.levelup.data.repo.NotificationRepo
-import com.example.levelup.ui.viewModels.notification.NotificationFragmentViewModel
-import com.example.levelup.ui.viewModels.notification.NotificationFragmentViewModelFactory
+import com.example.levelup.ui.viewModels.home.NotificationFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class NotificationFragment : Fragment() {
 
     private lateinit var context: Context
-    private lateinit var viewModel: NotificationFragmentViewModel
+    private val viewModel: NotificationFragmentViewModel by viewModels()
     private lateinit var binding: FragmentNotificationBinding
     private lateinit var announcementAdapter: NotificationRecyclerAdapter
 
@@ -48,20 +42,6 @@ class NotificationFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        val notificationApi = RetrofitHelper.getInstance().create(NotificationApi::class.java)
-        val notificationRepo = NotificationRepo(notificationApi)
-        val myApp = requireContext().applicationContext as MyApp
-        val database = myApp.databaseInstance()
-
-
-        viewModel =
-            ViewModelProvider(
-                this,
-                NotificationFragmentViewModelFactory(requireContext(), notificationRepo, database)
-            )[NotificationFragmentViewModel::class.java]
-
 
         announcementAdapter =
             NotificationRecyclerAdapter(viewModel.announcements.value!!, requireContext())

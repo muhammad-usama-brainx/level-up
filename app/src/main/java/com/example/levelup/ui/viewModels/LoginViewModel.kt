@@ -1,18 +1,25 @@
-package com.example.levelup.ui.viewModels.login
+package com.example.levelup.ui.viewModels
 
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.levelup.api.AuthApi
+import com.example.levelup.data.remote.api.AuthApi
 import com.example.levelup.data.Database
 import com.example.levelup.data.models.user.User
 import com.example.levelup.data.repo.AuthRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel(private val authApi: AuthApi, private val database: Database) : ViewModel() {
+
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val authApi: AuthApi,
+    private val database: Database
+) : ViewModel() {
 
 
     private val authRepo: AuthRepo = AuthRepo(authApi)

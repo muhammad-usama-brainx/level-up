@@ -1,6 +1,6 @@
 package com.example.levelup.data.repo
 
-import com.example.levelup.api.AuthApi
+import com.example.levelup.data.remote.api.AuthApi
 import com.example.levelup.data.models.user.User
 
 
