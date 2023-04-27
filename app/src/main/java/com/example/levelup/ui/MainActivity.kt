@@ -1,18 +1,20 @@
 package com.example.levelup.ui
 
 
-import SelectedNavItem
+import com.example.levelup.utils.SelectedNavItem
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.levelup.R
 import com.example.levelup.ui.adapters.ViewPagerAdapter
 import com.example.levelup.databinding.ActivityMainBinding
-import com.example.levelup.ui.viewModels.MainViewModel
+import com.example.levelup.ui.fragments.HomeFragment
+import com.example.levelup.ui.fragments.NotificationFragment
+import com.example.levelup.ui.fragments.SettingsFragment
 import com.google.android.material.badge.BadgeDrawable
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,18 +25,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var badgeDrawable: BadgeDrawable
     private lateinit var notificationMenuItem: MenuItem
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mainViewModel: MainViewModel
     private lateinit var viewPagerAdapter: ViewPagerAdapter
+    private lateinit var fragments: MutableList<Fragment>
+    private lateinit var selectedNavItem: SelectedNavItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
-
-        //Getting instance of view model
-        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
 
         //Setting badge for notification
@@ -44,8 +43,18 @@ class MainActivity : AppCompatActivity() {
         badgeDrawable.backgroundColor = ContextCompat.getColor(this, R.color.blue_500)
         badgeDrawable.badgeGravity = BadgeDrawable.TOP_END
 
-        viewPagerAdapter = ViewPagerAdapter(this, mainViewModel.fragments)
+
+        selectedNavItem = SelectedNavItem.Home
+        fragments = mutableListOf<Fragment>(
+            HomeFragment(), NotificationFragment(), SettingsFragment()
+        )
+        viewPagerAdapter = ViewPagerAdapter(this, fragments)
         binding.viewPager.adapter = viewPagerAdapter
+
+        binding.bottomNavigationBar.setOnItemSelectedListener {
+            binding.viewPager.currentItem = getPositionFromMenuItem(it)
+            true
+        }
 
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -53,17 +62,17 @@ class MainActivity : AppCompatActivity() {
                 // Called when a new page has been selected
                 when (position) {
                     0 -> {
-                        mainViewModel.selectedNavItem = SelectedNavItem.Home
+                        selectedNavItem = SelectedNavItem.Home
                         binding.bottomNavigationBar.selectedItemId = R.id.home
                         updateActiveNavItem()
                     }
                     1 -> {
-                        mainViewModel.selectedNavItem = SelectedNavItem.Notification
+                        selectedNavItem = SelectedNavItem.Notification
                         binding.bottomNavigationBar.selectedItemId = R.id.notification
                         updateActiveNavItem()
                     }
                     2 -> {
-                        mainViewModel.selectedNavItem = SelectedNavItem.Settings
+                        selectedNavItem = SelectedNavItem.Settings
                         binding.bottomNavigationBar.selectedItemId = R.id.settings
                         updateActiveNavItem()
                     }
@@ -72,10 +81,6 @@ class MainActivity : AppCompatActivity() {
         })
 
 
-        binding.bottomNavigationBar.setOnItemSelectedListener {
-            binding.viewPager.currentItem = mainViewModel.getPositionFromMenuItem(it)
-            true
-        }
     }
 
     private fun updateActiveNavItem() {
@@ -83,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         binding.notificationBorder.visibility = View.INVISIBLE
         binding.settingsBorder.visibility = View.INVISIBLE
 
-        when (mainViewModel.selectedNavItem) {
+        when (selectedNavItem) {
             SelectedNavItem.Home -> {
                 binding.homeBorder.visibility = View.VISIBLE
             }
@@ -94,5 +99,24 @@ class MainActivity : AppCompatActivity() {
                 binding.settingsBorder.visibility = View.VISIBLE
             }
         }
+    }
+
+    private fun getPositionFromMenuItem(item: MenuItem): Int {
+        val position: Int = when (item.itemId) {
+            R.id.home -> {
+                selectedNavItem = SelectedNavItem.Home
+                0
+            }
+            R.id.notification -> {
+                selectedNavItem = SelectedNavItem.Notification
+                1
+            }
+            R.id.settings -> {
+                selectedNavItem = SelectedNavItem.Settings
+                2
+            }
+            else -> 0
+        }
+        return position
     }
 }

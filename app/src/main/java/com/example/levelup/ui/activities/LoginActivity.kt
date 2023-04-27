@@ -26,20 +26,10 @@ class LoginActivity : AppCompatActivity() {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
-
-        val authApi = RetrofitHelper.getInstance().create(AuthApi::class.java)
-        val myApp = applicationContext as MyApp
-        val database = myApp.databaseInstance()
-
-        //Autologin
-        loginViewModel.tryAutoLogin()
-
 
         progressBarListener()
         successLoginListener()
         failLoginListener()
-
 
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
@@ -52,6 +42,11 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Invalid inputs", Toast.LENGTH_SHORT).show()
             }
         }
+
+
+        //Autologin
+        loginViewModel.tryAutoLogin()
+
     }
 
     private fun progressBarListener() {

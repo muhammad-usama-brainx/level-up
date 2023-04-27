@@ -20,17 +20,20 @@ class SettingsFragmentViewModel @Inject constructor(
     private val authRepo = AuthRepo(authApi)
     var isLoading = MutableLiveData<Boolean>(false)
 
-    suspend fun onLogout(): Boolean {
-        val loggedInUser = database.userDao().getUser()!!
+    fun onLogout(response: (Boolean) -> Unit) {
 
-        val isLoggedOut = viewModelScope.async {
+        viewModelScope.launch {
             isLoading.postValue(true)
+
+            val loggedInUser = database.userDao().getUser()!!
+
             val isLoggedOut = authRepo.logout(loggedInUser)
             if (isLoggedOut)
                 database.userDao().deleteUser(loggedInUser)
+            response(isLoggedOut)
+
             isLoading.postValue(false)
-            isLoggedOut
         }
-        return isLoggedOut.await()
+
     }
 }

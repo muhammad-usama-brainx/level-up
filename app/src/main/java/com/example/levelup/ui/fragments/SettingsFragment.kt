@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.example.levelup.R
 import com.example.levelup.ui.activities.LoginActivity
 import com.example.levelup.databinding.FragmentSettingsBinding
@@ -20,14 +21,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
-
-    private lateinit var profileCardView: CardView
-    private lateinit var changePasswordCardView: CardView
-    private lateinit var coachingCardView: CardView
-    private lateinit var contactCardView: CardView
-    private lateinit var privacyCardView: CardView
-    private lateinit var faqCardView: CardView
-    private lateinit var logoutCardView: CardView
 
     private val viewModel: SettingsFragmentViewModel by viewModels()
     private lateinit var binding: FragmentSettingsBinding
@@ -44,23 +37,11 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        profileCardView = view.findViewById(R.id.profileCardView)
-        changePasswordCardView = view.findViewById(R.id.changePasswordCardView)
-        coachingCardView = view.findViewById(R.id.coachingPlanCardView)
-        contactCardView = view.findViewById(R.id.contactUsCardView)
-        privacyCardView = view.findViewById(R.id.privacyCardView)
-        faqCardView = view.findViewById(R.id.faqCardView)
-        logoutCardView = view.findViewById(R.id.logoutCardView)
-
-
         progressBarListener()
 
-        logoutCardView.setOnClickListener {
+        binding.logoutCardView.setOnClickListener {
 
-            MainScope().launch {
-                val isLoggedOut = viewModel.onLogout()
-
+            viewModel.onLogout { isLoggedOut ->
                 if (isLoggedOut) {
                     Intent(requireContext(), LoginActivity::class.java).apply {
                         startActivity(this)
@@ -69,8 +50,6 @@ class SettingsFragment : Fragment() {
                 }
             }
         }
-
-
     }
 
     private fun progressBarListener() {

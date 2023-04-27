@@ -11,6 +11,7 @@ import com.example.levelup.data.repo.NotificationRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.example.levelup.utils.notifyObserver
 
 @SuppressLint("NotifyDataSetChanged")
 @HiltViewModel
@@ -42,7 +43,4 @@ class NotificationFragmentViewModel @Inject constructor(
     }
 
 
-    private fun <T> MutableLiveData<T>.notifyObserver() {
-        this.value = this.value
-    }
 }

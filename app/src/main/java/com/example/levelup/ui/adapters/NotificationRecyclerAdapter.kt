@@ -9,32 +9,25 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.levelup.R
 import com.example.levelup.data.models.notification.Announcement
+import com.example.levelup.ui.viewHolders.NotificationCardViewHolder
 
 
 class NotificationRecyclerAdapter(
     private val notificationsList: MutableList<Announcement>,
-    private val context: Context
-) : RecyclerView.Adapter<NotificationRecyclerAdapter.CardViewHolder>() {
+) : RecyclerView.Adapter<NotificationCardViewHolder>() {
 
-    inner class CardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var name: TextView = view.findViewById(R.id.name)
-        var role: TextView = view.findViewById(R.id.role)
-        var title: TextView = view.findViewById(R.id.title)
-        var message: TextView = view.findViewById(R.id.message)
-        var time: TextView = view.findViewById(R.id.time)
-    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationCardViewHolder {
         val view: View =
-            LayoutInflater.from(context).inflate(R.layout.notification_card, parent, false)
-        return CardViewHolder(view)
+            LayoutInflater.from(parent.context).inflate(R.layout.notification_card, parent, false)
+        return NotificationCardViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return notificationsList.size
     }
 
-    override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NotificationCardViewHolder, position: Int) {
         holder.name.text = notificationsList[position].name
         holder.role.text = notificationsList[position].role
         holder.title.text = notificationsList[position].title

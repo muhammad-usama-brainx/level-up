@@ -11,36 +11,31 @@ import com.example.levelup.R
 import com.example.levelup.ui.viewModels.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.fragment.app.viewModels
+import com.example.levelup.databinding.FragmentHomeBinding
 
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private lateinit var nameTextView: TextView
-    private lateinit var quoteTextView: TextView
-    private lateinit var quoteWriterTextView: TextView
+    private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeFragmentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        nameTextView = view.findViewById(R.id.nameTextView)
-        quoteTextView = view.findViewById(R.id.quoteTextView)
-        quoteWriterTextView = view.findViewById(R.id.quoteWriterTextView)
-
         viewModel.name.observe(requireActivity(), Observer {
-            nameTextView.text = it
+            binding.nameTextView.text = it
         })
-        quoteTextView.text = viewModel.quote()
-        quoteWriterTextView.text = viewModel.quoteWriter()
+        binding.quoteTextView.text = viewModel.quote()
+        binding.quoteWriterTextView.text = viewModel.quoteWriter()
     }
 
 }

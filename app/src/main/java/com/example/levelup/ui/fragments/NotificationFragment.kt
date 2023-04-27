@@ -44,20 +44,18 @@ class NotificationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         announcementAdapter =
-            NotificationRecyclerAdapter(viewModel.announcements.value!!, requireContext())
+            NotificationRecyclerAdapter(viewModel.announcements.value!!)
 
         viewModel.announcements.observe(requireActivity(), Observer {
             println(viewModel.announcements.value.toString())
             announcementAdapter.notifyDataSetChanged()
         })
-
-
         progressBarListener()
+
 
         val recyclerView: RecyclerView = view.findViewById(R.id.notificationRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = announcementAdapter
-
 
     }
 
